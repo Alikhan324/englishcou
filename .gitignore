@@ -1,0 +1,15 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.DS_Store
+*.log
+
+# Next.js (app lives in english-platform/)
+english-platform/.next/
+english-platform/.next-dev/
+english-platform/out/
+english-platform/.vercel/
+
+# Optional parent stub
+.next/

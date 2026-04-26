@@ -1,0 +1,47 @@
+export const translations = {
+  kz: {
+    heroBadge: "Ағылшын үйрену платформасы",
+    heroTitle: "Ағылшын тілін қазақша және орысша оңай үйрен",
+    heroText:
+      "Қазақша және орысша түсіндіру арқылы ағылшын тілін нөлден бастап үйрен. Сабақтар, PDF материалдар, слайдтар және практикалық тапсырмалар бір жерде.",
+    startLearning: "Оқуды бастау",
+    createAccount: "Аккаунт ашу",
+    whatYouLearn: "Не үйренесің?",
+    grammar: "Грамматика",
+    grammarText: "Present Simple, Past Simple, articles, tenses.",
+    speaking: "Сөйлеу",
+    speakingText: "Күнделікті диалогтар және сөйлеу практикасы.",
+    materials: "Материалдар",
+    materialsText: "PDF, slides, images және тапсырмалар.",
+  },
+  ru: {
+    heroBadge: "Платформа для изучения английского",
+    heroTitle: "Изучай английский легко на казахском и русском",
+    heroText:
+      "Изучай английский с нуля через объяснения на казахском и русском языках. Уроки, PDF материалы, слайды и практические задания в одном месте.",
+    startLearning: "Начать обучение",
+    createAccount: "Создать аккаунт",
+    whatYouLearn: "Что ты изучишь?",
+    grammar: "Грамматика",
+    grammarText: "Present Simple, Past Simple, articles, tenses.",
+    speaking: "Разговорная практика",
+    speakingText: "Ежедневные диалоги и практика речи.",
+    materials: "Материалы",
+    materialsText: "PDF, slides, images и задания.",
+  },
+  en: {
+    heroBadge: "English learning platform",
+    heroTitle: "Learn English easily in Kazakh and Russian",
+    heroText:
+      "Learn English from zero with explanations in Kazakh and Russian. Lessons, PDF materials, slides, and practice tasks in one place.",
+    startLearning: "Start Learning",
+    createAccount: "Create Account",
+    whatYouLearn: "What you will learn",
+    grammar: "Grammar",
+    grammarText: "Present Simple, Past Simple, articles, tenses.",
+    speaking: "Speaking",
+    speakingText: "Daily dialogues and speaking practice.",
+    materials: "Materials",
+    materialsText: "PDF, slides, images and tasks.",
+  },
+};
