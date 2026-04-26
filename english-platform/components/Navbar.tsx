@@ -11,23 +11,29 @@ type User = {
   isPremium: boolean;
 };
 
+const publicLinks = [
+  { href: "/", label: "Home" },
+  { href: "/courses", label: "Courses" },
+  { href: "/search", label: "Search" },
+  { href: "/pricing", label: "Pricing" },
+];
+
 export default function Navbar() {
   const [user, setUser] = useState<User | null>(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     function loadUser() {
-      const savedUser = localStorage.getItem("auth-user");
-
-      if (savedUser) {
-        setUser(JSON.parse(savedUser));
-      } else {
+      try {
+        const savedUser = localStorage.getItem("auth-user");
+        setUser(savedUser ? JSON.parse(savedUser) : null);
+      } catch {
+        localStorage.removeItem("auth-user");
         setUser(null);
       }
     }
 
     loadUser();
-
     window.addEventListener("storage", loadUser);
 
     return () => {
@@ -36,10 +42,16 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 6);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    function handleScroll() {
+      setScrolled(window.scrollY > 6);
+    }
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   function logout() {
@@ -53,7 +65,7 @@ export default function Navbar() {
       data-scrolled={scrolled}
       className="nav-shell sticky top-0 z-50 border-b border-border/80 bg-card/75 backdrop-blur-md dark:bg-card/70"
     >
-      <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-y-3 gap-x-4">
+      <nav className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-3 px-6 py-4">
         <Link
           href="/"
           className="font-display text-2xl font-semibold tracking-tight text-foreground transition-colors duration-300 ease-out hover:text-accent"
@@ -62,39 +74,35 @@ export default function Navbar() {
         </Link>
 
         <div className="flex flex-wrap items-center justify-end gap-x-1 gap-y-2 text-sm font-medium text-foreground/90">
-          <Link href="/" className="nav-link px-2 py-1 rounded-lg">
-            Home
-          </Link>
-
-          <Link href="/courses" className="nav-link px-2 py-1 rounded-lg">
-            Courses
-          </Link>
-
-          <Link href="/search" className="nav-link px-2 py-1 rounded-lg">
-            Search
-          </Link>
+          {publicLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="nav-link rounded-lg px-2 py-1"
+            >
+              {link.label}
+            </Link>
+          ))}
 
           {user && (
-            <Link href="/dashboard" className="nav-link px-2 py-1 rounded-lg">
-              Dashboard
-            </Link>
+            <>
+              <Link
+                href="/dashboard"
+                className="nav-link rounded-lg px-2 py-1"
+              >
+                Dashboard
+              </Link>
+
+              <Link
+                href="/certificate"
+                className="nav-link rounded-lg px-2 py-1"
+              >
+                Certificate
+              </Link>
+            </>
           )}
 
-          <Link href="/pricing" className="nav-link px-2 py-1 rounded-lg">
-            Pricing
-          </Link>
-
-          {user && (
-            <Link href="/certificate" className="nav-link px-2 py-1 rounded-lg">
-              Certificate
-            </Link>
-          )}
-
-          <Link href="/admin" className="nav-link px-2 py-1 rounded-lg">
-            Admin
-          </Link>
-
-          <div className="flex items-center gap-2 pl-1 border-l border-border/70 ml-1">
+          <div className="ml-1 flex items-center gap-2 border-l border-border/70 pl-1">
             <LanguageSwitcher />
             <ThemeToggle />
           </div>
@@ -103,7 +111,7 @@ export default function Navbar() {
             <div className="flex items-center gap-2 pl-2">
               <Link
                 href="/profile"
-                className="btn-primary px-5 py-2 rounded-xl text-sm"
+                className="btn-primary rounded-xl px-5 py-2 text-sm"
               >
                 Profile
               </Link>
@@ -111,13 +119,16 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={logout}
-                className="rounded-xl px-4 py-2 text-sm font-semibold text-foreground bg-accent-soft/80 border border-border hover:border-accent/40 transition-all duration-300 ease-out hover:bg-accent-soft"
+                className="rounded-xl border border-border bg-accent-soft/80 px-4 py-2 text-sm font-semibold text-foreground transition-all duration-300 ease-out hover:border-accent/40 hover:bg-accent-soft"
               >
                 Logout
               </button>
             </div>
           ) : (
-            <Link href="/login" className="btn-primary px-5 py-2 rounded-xl text-sm ml-1">
+            <Link
+              href="/login"
+              className="btn-primary ml-1 rounded-xl px-5 py-2 text-sm"
+            >
               Login
             </Link>
           )}
