@@ -5,7 +5,7 @@ export default function AdminPage() {
         <h1 className="text-3xl font-bold text-gray-900">Admin Panel</h1>
 
         <p className="mt-2 text-gray-600">
-          Бұл бет тек админге арналған.
+          Бұл бет тек админге арналған
         </p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
