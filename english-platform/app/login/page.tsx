@@ -1,24 +1,37 @@
 "use client";
 
+import { translations } from "@/data/translations";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+type Language = "kz" | "ru" | "en";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [language, setLanguage] = useState<Language>("kz");
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("site-language") as Language | null;
+    if (savedLanguage === "kz" || savedLanguage === "ru" || savedLanguage === "en") {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
+  const t = translations[language];
 
   function login() {
     const savedUser = localStorage.getItem("registered-user");
 
     if (!savedUser) {
-      alert("User not found. Please register first.");
+      alert(t.userNotFound);
       return;
     }
 
     const user = JSON.parse(savedUser);
 
     if (user.email !== email || user.password !== password) {
-      alert("Email or password is incorrect");
+      alert(t.incorrectCredentials);
       return;
     }
 
@@ -39,16 +52,16 @@ export default function LoginPage() {
       <section className="mx-auto max-w-md px-6 py-16 md:py-20">
         <div className="card-elevated rounded-[1.35rem] p-8 md:p-10">
           <h1 className="font-display text-3xl font-semibold tracking-tight text-foreground mb-2">
-            Login
+            {t.login}
           </h1>
 
           <p className="text-muted mb-8 leading-relaxed">
-            Аккаунтыңа кіріп, сабақтарды жалғастыр.
+            {t.loginText}
           </p>
 
           <form className="space-y-5">
             <div>
-              <label className="mb-2 block text-sm font-semibold text-foreground">Email</label>
+              <label className="mb-2 block text-sm font-semibold text-foreground">{t.email}</label>
 
               <input
                 type="email"
@@ -60,7 +73,7 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-semibold text-foreground">Password</label>
+              <label className="mb-2 block text-sm font-semibold text-foreground">{t.password}</label>
 
               <input
                 type="password"
@@ -72,14 +85,14 @@ export default function LoginPage() {
             </div>
 
             <button type="button" onClick={login} className="btn-primary w-full rounded-xl py-3 text-sm">
-              Sign in
+              {t.signIn}
             </button>
           </form>
 
           <p className="mt-6 text-sm text-muted">
-            Аккаунтың жоқ па?{" "}
+            {t.noAccount}{" "}
             <Link href="/register" className="font-semibold text-accent transition-colors hover:text-accent-hover">
-              Register
+              {t.register}
             </Link>
           </p>
         </div>

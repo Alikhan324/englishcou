@@ -2,8 +2,11 @@
 
 import { courses } from "@/data/courses";
 import { lessons } from "@/data/lessons";
+import { translations } from "@/data/translations";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+
+type Language = "kz" | "ru" | "en";
 
 type User = {
   name: string;
@@ -14,6 +17,14 @@ type User = {
 export default function ProfilePage() {
   const [user, setUser] = useState<User | null>(null);
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
+  const [language, setLanguage] = useState<Language>("kz");
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("site-language") as Language | null;
+    if (savedLanguage === "kz" || savedLanguage === "ru" || savedLanguage === "en") {
+      setLanguage(savedLanguage);
+    }
+  }, []);
 
   useEffect(() => {
     const savedUser = localStorage.getItem("auth-user");
@@ -40,6 +51,8 @@ export default function ProfilePage() {
 
     setCompletedLessons(allCompleted);
   }, []);
+
+  const t = translations[language];
 
   function logout() {
     localStorage.removeItem("auth-user");
@@ -88,15 +101,15 @@ export default function ProfilePage() {
       <section className="mx-auto max-w-5xl px-6 py-14 md:py-16">
         <div className="mb-12 max-w-2xl">
           <p className="font-display mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
-            Profile
+            {t.profile}
           </p>
 
           <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl mb-4">
-            My profile
+            {t.profileTitle}
           </h1>
 
           <p className="text-muted text-lg leading-relaxed">
-            Бұл жерде сен аккаунт ақпаратын және оқу прогрессін көресің.
+            {t.dashboardText}
           </p>
         </div>
 
@@ -117,26 +130,26 @@ export default function ProfilePage() {
                   : "inline-block rounded-full bg-accent-soft px-4 py-2 text-sm font-semibold text-accent-soft-fg"
               }
             >
-              {user.isPremium ? "Premium user" : "Free user"}
+              {user.isPremium ? t.premiumUser : t.freeUser}
             </span>
           </div>
 
           <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:col-span-2 md:p-8">
-            <h2 className="font-display mb-6 text-2xl font-semibold text-foreground">Learning stats</h2>
+            <h2 className="font-display mb-6 text-2xl font-semibold text-foreground">{t.yourProgress}</h2>
 
             <div className="mb-6 grid gap-4 sm:grid-cols-3">
               <div className="rounded-2xl border border-border/60 bg-accent-soft/40 p-4 dark:bg-accent-soft/15">
-                <p className="text-sm text-muted">Completed</p>
+                <p className="text-sm text-muted">{t.completed}</p>
                 <h3 className="font-display text-3xl font-semibold text-accent">{completedCount}</h3>
               </div>
 
               <div className="rounded-2xl border border-border/60 bg-accent-soft/40 p-4 dark:bg-accent-soft/15">
-                <p className="text-sm text-muted">Total</p>
+                <p className="text-sm text-muted">{t.totalLessons}</p>
                 <h3 className="font-display text-3xl font-semibold text-accent">{totalLessons}</h3>
               </div>
 
               <div className="rounded-2xl border border-border/60 bg-accent-soft/40 p-4 dark:bg-accent-soft/15">
-                <p className="text-sm text-muted">Progress</p>
+                <p className="text-sm text-muted">{t.progress}</p>
                 <h3 className="font-display text-3xl font-semibold text-accent">{progress}%</h3>
               </div>
             </div>
@@ -149,20 +162,20 @@ export default function ProfilePage() {
             </div>
 
             <p className="text-muted">
-              Сен {completedCount}/{totalLessons} сабақты аяқтадың.
+              {t.completedLessons}: {completedCount}/{totalLessons}
             </p>
           </div>
         </div>
 
         <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
-          <h2 className="font-display mb-6 text-2xl font-semibold text-foreground">Account actions</h2>
+          <h2 className="font-display mb-6 text-2xl font-semibold text-foreground">{t.profile}</h2>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <Link
               href="/dashboard"
               className="btn-primary block rounded-xl py-3 text-center text-sm"
             >
-              Dashboard
+              {t.dashboard}
             </Link>
 
             <button
@@ -170,14 +183,14 @@ export default function ProfilePage() {
               onClick={upgradeToPremium}
               className="btn-primary block w-full rounded-xl py-3 text-center text-sm"
             >
-              Upgrade
+              {t.premium}
             </button>
 
             <Link
               href="/certificate"
               className="block w-full rounded-xl bg-deep py-3 text-center text-sm font-semibold text-on-deep transition-colors duration-300 hover:bg-deep-hover"
             >
-              Certificate
+              {t.certificate}
             </Link>
 
             <button
@@ -185,7 +198,7 @@ export default function ProfilePage() {
               onClick={logout}
               className="block w-full rounded-xl border border-rose-600/50 bg-rose-600 py-3 text-center text-sm font-semibold text-white transition-colors duration-300 hover:bg-rose-700"
             >
-              Logout
+              {t.logout}
             </button>
           </div>
         </div>

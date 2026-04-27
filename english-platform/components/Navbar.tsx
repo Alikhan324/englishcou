@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeToggle from "./ThemeToggle";
+import { translations } from "@/data/translations";
+
+type Language = "kz" | "ru" | "en";
 
 type User = {
   name: string;
@@ -11,16 +14,26 @@ type User = {
   isPremium: boolean;
 };
 
-const publicLinks = [
-  { href: "/", label: "Home" },
-  { href: "/courses", label: "Courses" },
-  { href: "/search", label: "Search" },
-  { href: "/pricing", label: "Pricing" },
-];
-
 export default function Navbar() {
   const [user, setUser] = useState<User | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [language, setLanguage] = useState<Language>("kz");
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("site-language") as Language | null;
+    if (savedLanguage === "kz" || savedLanguage === "ru" || savedLanguage === "en") {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
+  const t = translations[language];
+
+  const publicLinks = [
+    { href: "/", label: t.home },
+    { href: "/courses", label: t.courses },
+    { href: "/search", label: t.search },
+    { href: "/pricing", label: t.pricing },
+  ];
 
   useEffect(() => {
     function loadUser() {
@@ -90,14 +103,14 @@ export default function Navbar() {
                 href="/dashboard"
                 className="nav-link rounded-lg px-2 py-1"
               >
-                Dashboard
+                {t.dashboard}
               </Link>
 
               <Link
                 href="/certificate"
                 className="nav-link rounded-lg px-2 py-1"
               >
-                Certificate
+                {t.certificate}
               </Link>
             </>
           )}
@@ -113,7 +126,7 @@ export default function Navbar() {
                 href="/profile"
                 className="btn-primary rounded-xl px-5 py-2 text-sm"
               >
-                Profile
+                {t.profile}
               </Link>
 
               <button
@@ -121,7 +134,7 @@ export default function Navbar() {
                 onClick={logout}
                 className="rounded-xl border border-border bg-accent-soft/80 px-4 py-2 text-sm font-semibold text-foreground transition-all duration-300 ease-out hover:border-accent/40 hover:bg-accent-soft"
               >
-                Logout
+                {t.logout}
               </button>
             </div>
           ) : (
@@ -129,7 +142,7 @@ export default function Navbar() {
               href="/login"
               className="btn-primary ml-1 rounded-xl px-5 py-2 text-sm"
             >
-              Login
+              {t.login}
             </Link>
           )}
         </div>

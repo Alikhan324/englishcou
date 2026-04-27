@@ -1,11 +1,25 @@
 export const translations = {
   kz: {
+    // Navigation
+    home: "Басты бет",
+    courses: "Курстар",
+    search: "Іздеу",
+    pricing: "Баға",
+    dashboard: "Панель",
+    certificate: "Сертификат",
+    profile: "Профиль",
+    login: "Кіру",
+    logout: "Шығу",
+
+    // Hero
     heroBadge: "Ағылшын үйрену платформасы",
     heroTitle: "Ағылшын тілін қазақша және орысша оңай үйрен",
     heroText:
       "Қазақша және орысша түсіндіру арқылы ағылшын тілін нөлден бастап үйрен. Сабақтар, PDF материалдар, слайдтар және практикалық тапсырмалар бір жерде.",
     startLearning: "Оқуды бастау",
     createAccount: "Аккаунт ашу",
+
+    // Features
     whatYouLearn: "Не үйренесің?",
     grammar: "Грамматика",
     grammarText: "Present Simple, Past Simple, articles, tenses.",
@@ -13,14 +27,143 @@ export const translations = {
     speakingText: "Күнделікті диалогтар және сөйлеу практикасы.",
     materials: "Материалдар",
     materialsText: "PDF, slides, images және тапсырмалар.",
+
+    // Dashboard
+    myLearningProgress: "Менің оқу прогрессім",
+    dashboardText: "Бұл жерде сен өз прогрессіңді, аяқталған сабақтарыңды және келесі сабақты көресің.",
+    completedLessons: "Аяқталған сабақтар",
+    totalLessons: "Барлық сабақтар",
+    progress: "Прогресс",
+    overallProgress: "Жалпы прогресс",
+    continueLesson: "Келесі сабақ",
+    goToLesson: "Сабаққа өту",
+    noMoreLessons: "Құттықтаймыз! Сіз барлық сабақтарды аяқтадыңыз.",
+    yourProgress: "Сіздің прогрессіңіз",
+    completed: "Аяқталды",
+    inProgress: "Жүріп жатыр",
+    notStarted: "Басталмаған",
+    lessons: "сабақ",
+    course: "Курс",
+    startCourse: "Курсты бастау",
+    continueCourse: "Курсты жалғастыру",
+    viewCourse: "Курсты көру",
+
+    // Certificate
+    yourCertificate: "Сіздің сертификатыңыз",
+    certificateText: "Сіз осы курсты сәтті аяқтағаннан кейін сертификат аласыз.",
+    downloadCertificate: "Сертификатты жүктеу",
+    getCertificate: "Сертификат алу",
+    certificateProgress: "Сертификат алу үшін барлық сабақтарды аяқтау керек",
+    goToDashboard: "Панельге өту",
+
+    // Courses
+    allCourses: "Барлық курстар",
+    courseCount: "курс",
+    lessonsCount: "сабақ",
+    start: "Бастау",
+    continue: "Жалғастыру",
+
+    // Search
+    searchPlaceholder: "Сабақтарды іздеу...",
+    noResults: "Ешнəрсе табылмады",
+    searchResults: "Іздеу нəтижелері",
+
+    // Pricing
+    pricingTitle: "Бағаландыру",
+    pricingText: "Біздің курстардың бағаларын көріңіз",
+    free: "Тегін",
+    premium: "Премиум",
+    perMonth: "айына",
+    features: "Мүмкіндіктер",
+    getStarted: "Бастау",
+    mostPopular: "Ең танымал",
+
+    // Profile
+    profileTitle: "Профиль",
+    editProfile: "Профильді өзгерту",
+    name: "Аты",
+    email: "Email",
+    save: "Сақтау",
+    saved: "Сақталды",
+    premiumUser: "Премиум пайдаланушы",
+    freeUser: "Тегін пайдаланушы",
+
+    // Login/Register
+    registerTitle: "Тіркелу",
+    loginTitle: "Кіру",
+    password: "Құпия сөз",
+    confirmPassword: "Құпия сөзді растау",
+    alreadyHaveAccount: "Егер сізде аккаунт болса",
+    loginLink: "Кіру",
+    dontHaveAccount: "Егер сізде аккаунт жоқ болса",
+    registerLink: "Тіркелу",
+    loginError: "Email немесе құпия сөз қате",
+    registerError: "Тіркелу кезінде қате",
+    userNotFound: "Пайдаланушы табылмады. Алдымен тіркеліңіз.",
+    incorrectCredentials: "Email немесе құпия сөз қате",
+    loginText: "Аккаунтыңа кіріп, сабақтарды жалғастыр.",
+    signIn: "Кіру",
+    noAccount: "Аккаунтың жоқ па?",
+    register: "Тіркелу",
+    registerText: "Жаңа аккаунт ашып, ағылшын үйренуді баста.",
+    fullName: "Аты-жөні",
+    createAccount: "Аккаунт ашу",
+    hasAccount: "Аккаунтың бар ма?",
+
+    // Course Detail
+    backToCourses: "Курстарға қайту",
+    noLessonsYet: "Сабақтар әлі жоқ",
+    noLessonsText: "Бұл курсқа сабақтар әлі қосылған жоқ.",
+    locked: "Бұғатталған",
+
+    // Lesson Detail
+    premiumLesson: "Бұл сабақ премиум",
+    premiumLessonText: "Бұл сабақты көру үшін premium access керек.",
+    viewPremiumPlan: "Премиум планды көру",
+    backToCourse: "Курсқа қайту",
+    backToLessons: "Сабақтарға қайту",
+    kazakhExplanation: "Қазақша түсіндіру",
+    russianExplanation: "Орысша түсіндіру",
+    examples: "Мысалдар",
+    practice: "Практика",
+    practiceText: "Мына мысалдарды дауыстап оқы:",
+    lessonStatus: "Сабақтың жағдайы",
+    lessonStatusText: "Сабақты аяқтасаң, төмендегі кнопканы бас.",
+    previousLesson: "Алдыңғы сабақ",
+    nextLesson: "Келесі сабақ",
+    finishCourse: "Курсты аяқтау",
+
+    // Admin
+    adminPanel: "Админ панелі",
+    adminText: "Бұл бет тек админге арналған",
+    lessons: "Сабақтар",
+    lessonsManage: "Сабақтарды басқару",
+    users: "Қолданушылар",
+    usersText: "Қолданушылар тізімі",
+    statistics: "Статистика",
+    statisticsText: "Сайт статистикасы",
   },
   ru: {
+    // Navigation
+    home: "Главная",
+    courses: "Курсы",
+    search: "Поиск",
+    pricing: "Цены",
+    dashboard: "Панель",
+    certificate: "Сертификат",
+    profile: "Профиль",
+    login: "Вход",
+    logout: "Выход",
+
+    // Hero
     heroBadge: "Платформа для изучения английского",
     heroTitle: "Изучай английский легко на казахском и русском",
     heroText:
       "Изучай английский с нуля через объяснения на казахском и русском языках. Уроки, PDF материалы, слайды и практические задания в одном месте.",
     startLearning: "Начать обучение",
     createAccount: "Создать аккаунт",
+
+    // Features
     whatYouLearn: "Что ты изучишь?",
     grammar: "Грамматика",
     grammarText: "Present Simple, Past Simple, articles, tenses.",
@@ -28,14 +171,143 @@ export const translations = {
     speakingText: "Ежедневные диалоги и практика речи.",
     materials: "Материалы",
     materialsText: "PDF, slides, images и задания.",
+
+    // Dashboard
+    myLearningProgress: "Мой прогресс обучения",
+    dashboardText: "Здесь вы увидите свой прогресс, завершённые уроки и следующий урок.",
+    completedLessons: "Завершённые уроки",
+    totalLessons: "Всего уроков",
+    progress: "Прогресс",
+    overallProgress: "Общий прогресс",
+    continueLesson: "Следующий урок",
+    goToLesson: "Перейти к уроку",
+    noMoreLessons: "Поздравляем! Вы завершили все уроки.",
+    yourProgress: "Ваш прогресс",
+    completed: "Завершено",
+    inProgress: "В процессе",
+    notStarted: "Не начато",
+    lessons: "уроков",
+    course: "Курс",
+    startCourse: "Начать курс",
+    continueCourse: "Продолжить курс",
+    viewCourse: "Посмотреть курс",
+
+    // Certificate
+    yourCertificate: "Ваш сертификат",
+    certificateText: "Вы получите сертификат после успешного завершения курса.",
+    downloadCertificate: "Скачать сертификат",
+    getCertificate: "Получить сертификат",
+    certificateProgress: "Для получения сертификата нужно завершить все уроки",
+    goToDashboard: "Перейти к панели",
+
+    // Courses
+    allCourses: "Все курсы",
+    courseCount: "курс",
+    lessonsCount: "уроков",
+    start: "Начать",
+    continue: "Продолжить",
+
+    // Search
+    searchPlaceholder: "Поиск уроков...",
+    noResults: "Ничего не найдено",
+    searchResults: "Результаты поиска",
+
+    // Pricing
+    pricingTitle: "Ценообразование",
+    pricingText: "Посмотрите цены на наши курсы",
+    free: "Бесплатно",
+    premium: "Премиум",
+    perMonth: "в месяц",
+    features: "Возможности",
+    getStarted: "Начать",
+    mostPopular: "Популярное",
+
+    // Profile
+    profileTitle: "Профиль",
+    editProfile: "Редактировать профиль",
+    name: "Имя",
+    email: "Email",
+    save: "Сохранить",
+    saved: "Сохранено",
+    premiumUser: "Премиум пользователь",
+    freeUser: "Бесплатный пользователь",
+
+    // Login/Register
+    registerTitle: "Регистрация",
+    loginTitle: "Вход",
+    password: "Пароль",
+    confirmPassword: "Подтвердите пароль",
+    alreadyHaveAccount: "Если у вас есть аккаунт",
+    loginLink: "Войти",
+    dontHaveAccount: "Если у вас нет аккаунта",
+    registerLink: "Зарегистрироваться",
+    loginError: "Неверный email или пароль",
+    registerError: "Ошибка при регистрации",
+    userNotFound: "Пользователь не найден. Пожалуйста, сначала зарегистрируйтесь.",
+    incorrectCredentials: "Email или пароль неверны",
+    loginText: "Войдите в свой аккаунт и продолжайте уроки.",
+    signIn: "Войти",
+    noAccount: "Нет аккаунта?",
+    register: "Регистрация",
+    registerText: "Создайте новый аккаунт и начните изучать английский.",
+    fullName: "Полное имя",
+    createAccount: "Создать аккаунт",
+    hasAccount: "Есть аккаунт?",
+
+    // Course Detail
+    backToCourses: "Назад к курсам",
+    noLessonsYet: "Уроков пока нет",
+    noLessonsText: "К этому курсу уроки ещё не добавлены.",
+    locked: "Заблокировано",
+
+    // Lesson Detail
+    premiumLesson: "Этот урок премиум",
+    premiumLessonText: "Для просмотра этого урока нужен премиум доступ.",
+    viewPremiumPlan: "Посмотреть премиум план",
+    backToCourse: "Назад к курсу",
+    backToLessons: "Назад к урокам",
+    kazakhExplanation: "Объяснение на казахском",
+    russianExplanation: "Объяснение на русском",
+    examples: "Примеры",
+    practice: "Практика",
+    practiceText: "Прочитайте эти примеры вслух:",
+    lessonStatus: "Статус урока",
+    lessonStatusText: "Когда закончите урок, нажмите кнопку ниже.",
+    previousLesson: "Предыдущий урок",
+    nextLesson: "Следующий урок",
+    finishCourse: "Завершить курс",
+
+    // Admin
+    adminPanel: "Панель администратора",
+    adminText: "Эта страница только для админа",
+    lessons: "Уроки",
+    lessonsManage: "Управление уроками",
+    users: "Пользователи",
+    usersText: "Список пользователей",
+    statistics: "Статистика",
+    statisticsText: "Статистика сайта",
   },
   en: {
+    // Navigation
+    home: "Home",
+    courses: "Courses",
+    search: "Search",
+    pricing: "Pricing",
+    dashboard: "Dashboard",
+    certificate: "Certificate",
+    profile: "Profile",
+    login: "Login",
+    logout: "Logout",
+
+    // Hero
     heroBadge: "English learning platform",
     heroTitle: "Learn English easily in Kazakh and Russian",
     heroText:
       "Learn English from zero with explanations in Kazakh and Russian. Lessons, PDF materials, slides, and practice tasks in one place.",
     startLearning: "Start Learning",
     createAccount: "Create Account",
+
+    // Features
     whatYouLearn: "What you will learn",
     grammar: "Grammar",
     grammarText: "Present Simple, Past Simple, articles, tenses.",
@@ -43,5 +315,119 @@ export const translations = {
     speakingText: "Daily dialogues and speaking practice.",
     materials: "Materials",
     materialsText: "PDF, slides, images and tasks.",
+
+    // Dashboard
+    myLearningProgress: "My learning progress",
+    dashboardText: "Here you will see your progress, completed lessons, and the next lesson.",
+    completedLessons: "Completed lessons",
+    totalLessons: "Total lessons",
+    progress: "Progress",
+    overallProgress: "Overall progress",
+    continueLesson: "Next lesson",
+    goToLesson: "Go to lesson",
+    noMoreLessons: "Congratulations! You have completed all lessons.",
+    yourProgress: "Your progress",
+    completed: "Completed",
+    inProgress: "In progress",
+    notStarted: "Not started",
+    lessons: "lessons",
+    course: "Course",
+    startCourse: "Start course",
+    continueCourse: "Continue course",
+    viewCourse: "View course",
+
+    // Certificate
+    yourCertificate: "Your certificate",
+    certificateText: "You will receive a certificate after successfully completing the course.",
+    downloadCertificate: "Download certificate",
+    getCertificate: "Get certificate",
+    certificateProgress: "To get a certificate you need to complete all lessons",
+    goToDashboard: "Go to dashboard",
+
+    // Courses
+    allCourses: "All courses",
+    courseCount: "course",
+    lessonsCount: "lessons",
+    start: "Start",
+    continue: "Continue",
+
+    // Search
+    searchPlaceholder: "Search lessons...",
+    noResults: "Nothing found",
+    searchResults: "Search results",
+
+    // Pricing
+    pricingTitle: "Pricing",
+    pricingText: "See the prices for our courses",
+    free: "Free",
+    premium: "Premium",
+    perMonth: "per month",
+    features: "Features",
+    getStarted: "Get Started",
+    mostPopular: "Most Popular",
+
+    // Profile
+    profileTitle: "Profile",
+    editProfile: "Edit profile",
+    name: "Name",
+    email: "Email",
+    save: "Save",
+    saved: "Saved",
+    premiumUser: "Premium user",
+    freeUser: "Free user",
+
+    // Login/Register
+    registerTitle: "Register",
+    loginTitle: "Login",
+    password: "Password",
+    confirmPassword: "Confirm password",
+    alreadyHaveAccount: "If you already have an account",
+    loginLink: "Login",
+    dontHaveAccount: "If you don't have an account",
+    registerLink: "Register",
+    loginError: "Invalid email or password",
+    registerError: "Error during registration",    userNotFound: "User not found. Please register first.",
+    incorrectCredentials: "Email or password is incorrect",
+    loginText: "Sign in to your account and continue learning.",
+    signIn: "Sign in",
+    noAccount: "Don't have an account?",
+    register: "Register",
+    registerText: "Create a new account and start learning English.",
+    fullName: "Full name",
+    createAccount: "Create account",
+    hasAccount: "Have an account?",
+
+    // Course Detail
+    backToCourses: "Back to courses",
+    noLessonsYet: "No lessons yet",
+    noLessonsText: "Lessons have not been added to this course yet.",
+    locked: "Locked",
+
+    // Lesson Detail
+    premiumLesson: "This lesson is premium",
+    premiumLessonText: "You need premium access to view this lesson.",
+    viewPremiumPlan: "View premium plan",
+    backToCourse: "Back to course",
+    backToLessons: "Back to lessons",
+    kazakhExplanation: "Kazakh explanation",
+    russianExplanation: "Russian explanation",
+    examples: "Examples",
+    practice: "Practice",
+    practiceText: "Read these examples out loud:",
+    lessonStatus: "Lesson status",
+    lessonStatusText: "When you finish the lesson, click the button below.",
+    previousLesson: "Previous lesson",
+    nextLesson: "Next lesson",
+    finishCourse: "Finish course",
+
+    // Admin
+    adminPanel: "Admin Panel",
+    adminText: "This page is only for admins",
+    lessons: "Lessons",
+    lessonsManage: "Manage lessons",
+    users: "Users",
+    usersText: "User list",
+    statistics: "Statistics",
+    statisticsText: "Site statistics",
   },
 };

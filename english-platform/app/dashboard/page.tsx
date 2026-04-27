@@ -2,11 +2,22 @@
 
 import { courses } from "@/data/courses";
 import { lessons } from "@/data/lessons";
+import { translations } from "@/data/translations";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+type Language = "kz" | "ru" | "en";
+
 export default function DashboardPage() {
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
+  const [language, setLanguage] = useState<Language>("kz");
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("site-language") as Language | null;
+    if (savedLanguage === "kz" || savedLanguage === "ru" || savedLanguage === "en") {
+      setLanguage(savedLanguage);
+    }
+  }, []);
 
   useEffect(() => {
     const allCompleted: number[] = [];
@@ -25,6 +36,8 @@ export default function DashboardPage() {
     setCompletedLessons(allCompleted);
   }, []);
 
+  const t = translations[language];
+
   const totalLessons = lessons.length;
   const completedCount = completedLessons.length;
 
@@ -40,38 +53,38 @@ export default function DashboardPage() {
       <section className="mx-auto max-w-6xl px-6 py-14 md:py-16">
         <div className="mb-12 max-w-2xl">
           <p className="font-display mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
-            Dashboard
+            {t.dashboard}
           </p>
 
           <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl mb-4">
-            My learning progress
+            {t.myLearningProgress}
           </h1>
 
           <p className="text-muted text-lg leading-relaxed">
-            Бұл жерде сен өз прогрессіңді, аяқталған сабақтарыңды және келесі сабақты көресің.
+            {t.dashboardText}
           </p>
         </div>
 
         <div className="mb-8 grid gap-6 md:grid-cols-3">
           <div className="rounded-3xl border border-border bg-card p-6 shadow-sm transition-shadow duration-500 hover:shadow-md">
-            <p className="mb-2 text-sm font-medium text-muted">Completed lessons</p>
+            <p className="mb-2 text-sm font-medium text-muted">{t.completedLessons}</p>
             <h2 className="font-display text-4xl font-semibold text-accent">{completedCount}</h2>
           </div>
 
           <div className="rounded-3xl border border-border bg-card p-6 shadow-sm transition-shadow duration-500 hover:shadow-md">
-            <p className="mb-2 text-sm font-medium text-muted">Total lessons</p>
+            <p className="mb-2 text-sm font-medium text-muted">{t.totalLessons}</p>
             <h2 className="font-display text-4xl font-semibold text-accent">{totalLessons}</h2>
           </div>
 
           <div className="rounded-3xl border border-border bg-card p-6 shadow-sm transition-shadow duration-500 hover:shadow-md">
-            <p className="mb-2 text-sm font-medium text-muted">Progress</p>
+            <p className="mb-2 text-sm font-medium text-muted">{t.progress}</p>
             <h2 className="font-display text-4xl font-semibold text-accent">{progress}%</h2>
           </div>
         </div>
 
         <div className="mb-8 rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="font-display text-2xl font-semibold text-foreground">Overall progress</h2>
+            <h2 className="font-display text-2xl font-semibold text-foreground">{t.overallProgress}</h2>
             <span className="font-semibold text-accent">
               {completedCount}/{totalLessons}
             </span>
@@ -87,39 +100,39 @@ export default function DashboardPage() {
 
         <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
-            <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">Continue learning</h2>
+            <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">{t.continueLesson}</h2>
 
             {nextLesson ? (
               <>
                 <p className="mb-5 text-muted leading-relaxed">
-                  Келесі сабақ: <b className="text-foreground">{nextLesson.title}</b>
+                  <b className="text-foreground">{nextLesson.title}</b>
                 </p>
 
                 <Link
                   href={`/lessons/${nextLesson.id}`}
                   className="btn-primary block w-full rounded-xl py-3 text-center text-sm"
                 >
-                  Continue lesson
+                  {t.goToLesson}
                 </Link>
               </>
             ) : (
               <>
                 <p className="mb-5 text-muted leading-relaxed">
-                  Керемет! Барлық сабақтарды аяқтадың.
+                  {t.noMoreLessons}
                 </p>
 
                 <Link
                   href="/courses"
                   className="block w-full rounded-xl bg-deep py-3 text-center text-sm font-semibold text-on-deep transition-all duration-300 ease-out hover:bg-deep-hover"
                 >
-                  View courses
+                  {t.viewCourse}
                 </Link>
               </>
             )}
           </div>
 
           <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
-            <h2 className="font-display mb-4 text-2xl font-semibold text-foreground">Courses</h2>
+            <h2 className="font-display mb-4 text-2xl font-semibold text-foreground">{t.course}</h2>
 
             <div className="space-y-3">
               {courses.map((course) => {
@@ -142,7 +155,7 @@ export default function DashboardPage() {
                         <h3 className="font-semibold text-foreground">{course.title}</h3>
 
                         <p className="text-sm text-muted">
-                          {completedInCourse}/{courseLessons.length} lessons
+                          {completedInCourse}/{courseLessons.length} {t.lessons}
                         </p>
                       </div>
 

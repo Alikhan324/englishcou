@@ -1,22 +1,38 @@
+"use client";
+
 import Link from "next/link";
 import { courses } from "@/data/courses";
+import { translations } from "@/data/translations";
+import { useEffect, useState } from "react";
+
+type Language = "kz" | "ru" | "en";
 
 export default function CoursesPage() {
+  const [language, setLanguage] = useState<Language>("kz");
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("site-language") as Language | null;
+    if (savedLanguage === "kz" || savedLanguage === "ru" || savedLanguage === "en") {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
+  const t = translations[language];
+
   return (
     <main className="page-shell">
       <section className="max-w-6xl mx-auto px-6 py-14 md:py-20">
         <div className="mb-12 md:mb-14 max-w-2xl">
           <p className="font-display text-accent font-semibold tracking-wide text-sm uppercase mb-3">
-            Courses
+            {t.courses}
           </p>
 
           <h1 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-4">
-            Choose your English course
+            {t.allCourses}
           </h1>
 
           <p className="text-muted text-lg leading-relaxed">
-            Өзіңе керек курсты таңда. Әр курс қазақша және орысша түсіндірумен
-            беріледі.
+            {t.heroText}
           </p>
         </div>
 
@@ -31,7 +47,7 @@ export default function CoursesPage() {
                   {course.level}
                 </span>
 
-                <span className="text-sm text-muted">{course.lessons} lessons</span>
+                <span className="text-sm text-muted">{course.lessons} {t.lessonsCount}</span>
               </div>
 
               <h2 className="font-display text-2xl font-semibold text-foreground mb-3">
@@ -44,7 +60,7 @@ export default function CoursesPage() {
                 href={`/courses/${course.id}`}
                 className="btn-primary mt-auto block w-full rounded-xl py-3 text-center text-sm"
               >
-                Open course
+                {t.viewCourse}
               </Link>
             </article>
           ))}

@@ -1,9 +1,15 @@
+"use client";
+
 import { courses } from "@/data/courses";
 import { lessons } from "@/data/lessons";
+import { translations } from "@/data/translations";
 import { currentUser } from "@/data/user";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CourseProgress from "@/components/CourseProgress";
+import { useEffect, useState } from "react";
+
+type Language = "kz" | "ru" | "en";
 
 type Props = {
   params: Promise<{
@@ -11,7 +17,22 @@ type Props = {
   }>;
 };
 
-export default async function CourseDetailPage({ params }: Props) {
+export default function CourseDetailPage({ params }: Props) {
+  const [language, setLanguage] = useState<Language>("kz");
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("site-language") as Language | null;
+    if (savedLanguage === "kz" || savedLanguage === "ru" || savedLanguage === "en") {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
+  const t = translations[language];
+
+  return <CourseDetailContent params={params} language={language} t={t} />;
+}
+
+async function CourseDetailContent({ params, language, t }: { params: Promise<{ id: string }>; language: Language; t: typeof translations.kz }) {
   const { id } = await params;
   const courseId = Number(id);
 
@@ -32,7 +53,7 @@ export default async function CourseDetailPage({ params }: Props) {
           href="/courses"
           className="inline-flex items-center gap-1 text-sm font-semibold text-accent transition-colors duration-300 hover:text-accent-hover"
         >
-          <span aria-hidden>←</span> Back to courses
+          <span aria-hidden>←</span> {t.backToCourses}
         </Link>
 
         <div className="mt-8 mb-10">
@@ -54,8 +75,8 @@ export default async function CourseDetailPage({ params }: Props) {
 
         {courseLessons.length === 0 ? (
           <div className="rounded-3xl border border-border bg-card p-8 shadow-sm">
-            <h2 className="font-display text-2xl font-semibold text-foreground mb-2">No lessons yet</h2>
-            <p className="text-muted">Бұл курсқа сабақтар әлі қосылған жоқ.</p>
+            <h2 className="font-display text-2xl font-semibold text-foreground mb-2">{t.noLessonsYet}</h2>
+            <p className="text-muted">{t.noLessonsText}</p>
           </div>
         ) : (
           <div className="space-y-5">
@@ -80,7 +101,7 @@ export default async function CourseDetailPage({ params }: Props) {
                         </h2>
 
                         {lesson.isPremium && (
-                          <span className="badge-premium">Premium</span>
+                          <span className="badge-premium">{t.premium}</span>
                         )}
                       </div>
 
@@ -94,7 +115,7 @@ export default async function CourseDetailPage({ params }: Props) {
                           : "inline-flex shrink-0 items-center justify-center rounded-xl bg-accent-soft px-4 py-2 text-sm font-semibold text-accent"
                       }
                     >
-                      {isLocked ? "Locked" : lesson.duration}
+                      {isLocked ? t.locked : lesson.duration}
                     </span>
                   </div>
                 </Link>

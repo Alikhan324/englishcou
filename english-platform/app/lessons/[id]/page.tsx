@@ -1,10 +1,16 @@
+"use client";
+
 import { lessons } from "@/data/lessons";
 import { quizzes } from "@/data/quizzes";
+import { translations } from "@/data/translations";
 import { currentUser } from "@/data/user";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import LessonCompleteButton from "@/components/LessonCompleteButton";
 import Quiz from "@/components/Quiz";
+import { useEffect, useState } from "react";
+
+type Language = "kz" | "ru" | "en";
 
 type Props = {
   params: Promise<{
@@ -12,7 +18,22 @@ type Props = {
   }>;
 };
 
-export default async function LessonPage({ params }: Props) {
+export default function LessonPage({ params }: Props) {
+  const [language, setLanguage] = useState<Language>("kz");
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("site-language") as Language | null;
+    if (savedLanguage === "kz" || savedLanguage === "ru" || savedLanguage === "en") {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
+  const t = translations[language];
+
+  return <LessonContent params={params} language={language} t={t} />;
+}
+
+async function LessonContent({ params, language, t }: { params: Promise<{ id: string }>; language: Language; t: typeof translations.kz }) {
   const { id } = await params;
   const lessonId = Number(id);
 
@@ -32,15 +53,15 @@ export default async function LessonPage({ params }: Props) {
             </div>
 
             <h1 className="font-display mb-3 text-3xl font-semibold text-foreground">
-              This lesson is premium
+              {t.premiumLesson}
             </h1>
 
             <p className="mb-8 text-muted leading-relaxed">
-              Бұл сабақты көру үшін premium access керек.
+              {t.premiumLessonText}
             </p>
 
             <Link href="/pricing" className="btn-primary inline-block rounded-xl px-8 py-3 text-sm">
-              View premium plan
+              {t.viewPremiumPlan}
             </Link>
 
             <div className="mt-8">
@@ -48,7 +69,7 @@ export default async function LessonPage({ params }: Props) {
                 href={`/courses/${lesson.courseId}`}
                 className="text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
               >
-                ← Back to course
+                ← {t.backToCourse}
               </Link>
             </div>
           </div>
@@ -77,7 +98,7 @@ export default async function LessonPage({ params }: Props) {
           href={`/courses/${lesson.courseId}`}
           className="text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
         >
-          ← Back to lessons
+          ← {t.backToLessons}
         </Link>
 
         <div className="mb-10 mt-8">
@@ -94,17 +115,17 @@ export default async function LessonPage({ params }: Props) {
 
         <div className="grid gap-6">
           <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
-            <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">Қазақша түсіндіру</h2>
+            <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">{t.kazakhExplanation}</h2>
             <p className="leading-relaxed text-muted">{lesson.contentKz}</p>
           </div>
 
           <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
-            <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">Русское объяснение</h2>
+            <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">{t.russianExplanation}</h2>
             <p className="leading-relaxed text-muted">{lesson.contentRu}</p>
           </div>
 
           <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
-            <h2 className="font-display mb-4 text-2xl font-semibold text-foreground">Examples</h2>
+            <h2 className="font-display mb-4 text-2xl font-semibold text-foreground">{t.examples}</h2>
 
             <div className="grid gap-4 sm:grid-cols-3">
               {lesson.examples.map((example) => (
@@ -120,9 +141,9 @@ export default async function LessonPage({ params }: Props) {
           </div>
 
           <div className="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
-            <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">Practice</h2>
+            <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">{t.practice}</h2>
 
-            <p className="mb-4 text-muted">Мына мысалдарды дауыстап оқы:</p>
+            <p className="mb-4 text-muted">{t.practiceText}</p>
 
             <ul className="space-y-2 text-foreground/90">
               {lesson.examples.map((example) => (
@@ -137,8 +158,8 @@ export default async function LessonPage({ params }: Props) {
         </div>
 
         <div className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
-          <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">Lesson status</h2>
-          <p className="mb-5 text-muted">Сабақты аяқтасаң, төмендегі кнопканы бас.</p>
+          <h2 className="font-display mb-3 text-2xl font-semibold text-foreground">{t.lessonStatus}</h2>
+          <p className="mb-5 text-muted">{t.lessonStatusText}</p>
 
           <LessonCompleteButton courseId={lesson.courseId} lessonId={lesson.id} />
         </div>
@@ -149,7 +170,7 @@ export default async function LessonPage({ params }: Props) {
               href={`/lessons/${previousLesson.id}`}
               className="btn-ghost rounded-xl px-5 py-3 text-sm font-semibold"
             >
-              ← Previous lesson
+              ← {t.previousLesson}
             </Link>
           ) : (
             <div />
@@ -157,14 +178,14 @@ export default async function LessonPage({ params }: Props) {
 
           {nextLesson ? (
             <Link href={`/lessons/${nextLesson.id}`} className="btn-primary rounded-xl px-5 py-3 text-sm">
-              Next lesson →
+              {t.nextLesson} →
             </Link>
           ) : (
             <Link
               href={`/courses/${lesson.courseId}`}
               className="rounded-xl bg-deep px-5 py-3 text-sm font-semibold text-on-deep transition-colors duration-300 hover:bg-deep-hover"
             >
-              Finish course
+              {t.finishCourse}
             </Link>
           )}
         </div>

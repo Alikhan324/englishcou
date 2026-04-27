@@ -2,11 +2,22 @@
 
 import { courses } from "@/data/courses";
 import { lessons } from "@/data/lessons";
+import { translations } from "@/data/translations";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+type Language = "kz" | "ru" | "en";
+
 export default function CertificatePage() {
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
+  const [language, setLanguage] = useState<Language>("kz");
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("site-language") as Language | null;
+    if (savedLanguage === "kz" || savedLanguage === "ru" || savedLanguage === "en") {
+      setLanguage(savedLanguage);
+    }
+  }, []);
 
   useEffect(() => {
     const allCompleted: number[] = [];
@@ -25,6 +36,8 @@ export default function CertificatePage() {
     setCompletedLessons(allCompleted);
   }, []);
 
+  const t = translations[language];
+
   const totalLessons = lessons.length;
   const completedCount = completedLessons.length;
   const isCompleted = completedCount >= totalLessons && totalLessons > 0;
@@ -34,15 +47,15 @@ export default function CertificatePage() {
       <section className="mx-auto max-w-5xl px-6 py-14 md:py-16">
         <div className="mb-12 text-center">
           <p className="font-display mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
-            Certificate
+            {t.certificate}
           </p>
 
           <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl mb-4">
-            Course completion certificate
+            {t.yourCertificate}
           </h1>
 
           <p className="mx-auto max-w-xl text-muted text-lg leading-relaxed">
-            Барлық сабақтарды аяқтасаң, сертификат ашылады.
+            {t.certificateText}
           </p>
         </div>
 
@@ -72,15 +85,15 @@ export default function CertificatePage() {
 
             <div className="relative mt-10 grid gap-4 text-sm text-muted md:grid-cols-3">
               <div className="rounded-2xl border border-border bg-accent-soft/30 p-4 dark:bg-accent-soft/10">
-                Completed lessons: {completedCount}
+                {t.completedLessons}: {completedCount}
               </div>
 
               <div className="rounded-2xl border border-border bg-accent-soft/30 p-4 dark:bg-accent-soft/10">
-                Total lessons: {totalLessons}
+                {t.totalLessons}: {totalLessons}
               </div>
 
               <div className="rounded-2xl border border-border bg-accent-soft/30 p-4 dark:bg-accent-soft/10">
-                Status: Completed
+                {t.completed}
               </div>
             </div>
           </div>
@@ -90,18 +103,18 @@ export default function CertificatePage() {
               ◇
             </div>
 
-            <h2 className="font-display mb-3 text-3xl font-semibold text-foreground">Certificate is locked</h2>
+            <h2 className="font-display mb-3 text-3xl font-semibold text-foreground">{t.certificate}</h2>
 
             <p className="mb-6 text-muted leading-relaxed">
-              Сертификат алу үшін барлық сабақтарды аяқта.
+              {t.certificateProgress}
             </p>
 
             <p className="mb-8 font-semibold text-accent">
-              Progress: {completedCount}/{totalLessons} lessons
+              {t.progress}: {completedCount}/{totalLessons} {t.lessons}
             </p>
 
             <Link href="/dashboard" className="btn-primary inline-block rounded-xl px-8 py-3 text-sm">
-              Go to dashboard
+              {t.goToDashboard}
             </Link>
           </div>
         )}
